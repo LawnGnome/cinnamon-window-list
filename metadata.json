@@ -1,0 +1,7 @@
+{
+    "max-instances": -1, 
+    "dangerous": false, 
+    "description": "Main Cinnamon window list (including all workspaces)", 
+    "uuid": "window-list@adamharvey.name", 
+    "name": "Window list (including all workspaces)"
+}
