@@ -958,7 +958,7 @@ MyApplet.prototype = {
         this._windows = [];
         this._monitorWatchList = [];
 
-        this.settings = new Settings.AppletSettings(this, "window-list@cinnamon.org", this.instance_id);
+        this.settings = new Settings.AppletSettings(this, "window-list@adamharvey.name", this.instance_id);
 
         this.settings.bind("enable-alerts", "enableAlerts", this._updateAttentionGrabber);
         this.settings.bind("enable-scrolling", "scrollable", this._onEnableScrollChanged);
