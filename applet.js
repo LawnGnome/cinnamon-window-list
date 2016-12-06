@@ -958,7 +958,7 @@ MyApplet.prototype = {
         this._windows = [];
         this._monitorWatchList = [];
 
-        this.settings = new Settings.AppletSettings(this, "window-list@adamharvey.name", this.instance_id);
+        this.settings = new Settings.AppletSettings(this, "window-list@cinnamon.org", this.instance_id);
 
         this.settings.bind("enable-alerts", "enableAlerts", this._updateAttentionGrabber);
         this.settings.bind("enable-scrolling", "scrollable", this._onEnableScrollChanged);
@@ -1136,10 +1136,8 @@ MyApplet.prototype = {
         if (!this._windows[i].getAttention())
             return;
 
-		/*
         if (window.get_workspace() != global.screen.get_active_workspace())
             this._addWindow(window, true);
-		*/
     },
 
     _onFocus: function() {
@@ -1148,7 +1146,16 @@ MyApplet.prototype = {
     },
 
     _refreshItem: function(window) {
-        window.actor.visible = true;
+        window.actor.visible =
+            (window.metaWindow.get_workspace() == global.screen.get_active_workspace()) ||
+            window.metaWindow.is_on_all_workspaces();
+
+        /* The above calculates the visibility if it were the normal
+         * AppMenuButton. If this is actually a temporary AppMenuButton for
+         * urgent windows on other workspaces, it is shown iff the normal
+         * one isn't shown! */
+        if (window.alert)
+            window.actor.visible = !window.actor.visible;
     },
 
     _refreshAllItems: function() {
