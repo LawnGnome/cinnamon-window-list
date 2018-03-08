@@ -1,7 +1,7 @@
-A modified version of the Cinnamon window list applet that shows applications
-from all workspaces.
+A modified version of the Cinnamon window list applet that provides some extra
+knobs.
 
-This is currently based on the window list shipped in Cinnamon 3.2.1.
+This is currently based on the window list shipped in Cinnamon 3.6.7.
 
 ## Installation
 

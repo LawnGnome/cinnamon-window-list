@@ -3,6 +3,11 @@
     "type": "section",
     "description": "Behavior"
   },
+  "show-all-workspaces" : {
+    "type" : "switch",
+    "default" : false,
+    "description": "Show windows from all workspaces"
+  },
   "enable-alerts" : {
       "type" : "switch",
       "default" : true,
@@ -16,7 +21,8 @@
   "reverse-scrolling" : {
       "type" : "switch",
       "default" : false,
-      "description" : "Reverse the direction of mouse-wheel scrolling in the window list"
+      "description" : "Reverse the direction of mouse-wheel scrolling in the window list",
+      "dependency" : "enable-scrolling"
   },
   "middle-click-close": {
       "type": "switch",
@@ -36,5 +42,14 @@
       "type": "switch",
       "default": true,
       "description": "Show window thumbnails on hover"
+  },
+  "button-size": {
+      "type": "spinbutton",
+      "default": 150,
+      "min": 20,
+      "max": 500,
+      "step": 10,
+      "units": "pixels",
+      "description": "Button width in the panel"
   }
 }

@@ -1,7 +1,8 @@
 {
     "max-instances": -1, 
     "dangerous": false, 
-    "description": "Main Cinnamon window list (including all workspaces)", 
+    "description": "Main Cinnamon window list (with more knobs)", 
     "uuid": "window-list@adamharvey.name", 
-    "name": "Window list (including all workspaces)"
+    "name": "Window list (with more knobs)",
+    "icon": "gnome-window-manager"
 }
