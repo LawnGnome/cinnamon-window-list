@@ -548,6 +548,7 @@ AppMenuButton.prototype = {
             if (this.alert) {
                 this.destroy();
                 this._windows.splice(this._windows.indexOf(this), 1);
+                this._sortWindows();
             }
         } else {
             this.actor.remove_style_pseudo_class('focus');
@@ -1023,6 +1024,7 @@ MyApplet.prototype = {
         this.settings.bind("enable-scrolling", "scrollable", this._onEnableScrollChanged);
         this.settings.bind("reverse-scrolling", "reverseScroll");
         this.settings.bind("middle-click-close", "middleClickClose");
+        this.settings.bind("sort-windows-by-workspace", "sortWindowsByWorkspace");
         this.settings.bind("buttons-use-entire-space", "buttonsUseEntireSpace", this._refreshAllItems);
         this.settings.bind("window-preview", "usePreview", this._onPreviewChanged);
         this.settings.bind("button-size", "buttonSize");
@@ -1305,6 +1307,8 @@ MyApplet.prototype = {
         this.manager_container.add_actor(appButton.actor);
 
         this._windows.push(appButton);
+        this._sortWindows();
+
         /* We want to make the AppMenuButtons look like they are ordered by
          * workspace. So if we add an AppMenuButton for a window in another
          * workspace, put it in the right position. It is at the end by
@@ -1329,6 +1333,37 @@ MyApplet.prototype = {
                 this._windows[i].destroy();
                 this._windows.splice(i, 1);
             }
+        }
+        this._sortWindows();
+    },
+
+    _sortWindows: function() {
+        if (this.sortWindowsByWorkspace) {
+            this._windows.sort(function(a, b) {
+                const aWorkspace = a.metaWindow.get_workspace().index();
+                const bWorkspace = b.metaWindow.get_workspace().index();
+
+                if (aWorkspace < bWorkspace) {
+                    return -1;
+                } else if (aWorkspace > bWorkspace) {
+                    return 1;
+                }
+
+                const aTitle = a.metaWindow.get_title().toLowerCase();
+                const bTitle = b.metaWindow.get_title().toLowerCase();
+
+                if (aTitle < bTitle) {
+                    return -1;
+                } else if (aTitle > bTitle) {
+                    return 1;
+                }
+
+                return 0;
+            });
+
+            this._windows.forEach((window, i) => {
+                this.manager_container.set_child_at_index(window.actor, i);
+            });
         }
     },
 

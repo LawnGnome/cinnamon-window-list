@@ -29,6 +29,11 @@
       "default": true,
       "description": "Middle click to close window"
   },
+  "sort-windows-by-workspace": {
+      "type": "switch",
+      "default": false,
+      "description": "Sort windows by workspace instead of by opening time"
+  },
   "section2": {
     "type": "section",
     "description": "Display"
