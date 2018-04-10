@@ -1349,12 +1349,12 @@ MyApplet.prototype = {
                     return 1;
                 }
 
-                const aTitle = a.metaWindow.get_title().toLowerCase();
-                const bTitle = b.metaWindow.get_title().toLowerCase();
+                const aTime = a.metaWindow.get_user_time();
+                const bTime = b.metaWindow.get_user_time();
 
-                if (aTitle < bTitle) {
+                if (aTime < bTime) {
                     return -1;
-                } else if (aTitle > bTitle) {
+                } else if (aTime > bTime) {
                     return 1;
                 }
 
